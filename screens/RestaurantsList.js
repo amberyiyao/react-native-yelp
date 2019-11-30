@@ -58,7 +58,7 @@ export default class RestaurantsList extends Component {
             data={this.state.restaurants}
             keyExtractor={({id}) => id}
             renderItem={({item}) => (
-              <ListItem thumbnail>
+              <ListItem onPress={()=> this.props.navigation.navigate('Detail', { restaurant: item})} thumbnail>
                 <Left>
                   <Thumbnail square source={{ uri: item.image_url }} />
                 </Left>
@@ -67,10 +67,7 @@ export default class RestaurantsList extends Component {
                   <Text style={styles.p2}>{(item.distance/1000).toFixed(2) + " km"}</Text>
                 </Body>
                 <Right>
-                  <Button transparent onPress={()=>{
-                      console.log('To Detail Page')
-                      this.props.navigation.navigate('Detail', { restaurant: item})
-                  }}>
+                  <Button transparent >
                     <Icon style={styles.button} name="arrow-forward"/>
                   </Button>
                 </Right>

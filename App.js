@@ -23,9 +23,6 @@ const AppNavigation = createStackNavigator(
     },
     Detail:{
       screen: Detail,
-      // navigationOptions: {
-      //   title: "Restaurants Details"
-      // }
     }
   },
   {
