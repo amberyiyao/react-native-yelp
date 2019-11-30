@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { StyleSheet, View } from 'react-native';
-import { Container, Text, Button, Spinner} from 'native-base';
+import { Container, Text, Button, Spinner, Toast} from 'native-base';
 import * as Font from 'expo-font'
 import { Ionicons } from '@expo/vector-icons'
 
@@ -16,6 +16,7 @@ export default class RestaurantsList extends Component {
   }
 
   getLocation = () =>{
+        this.setState({isReady: false})
         const opts = {
             enableHighAccuracy: true,
             timeout: 5000,
@@ -31,11 +32,12 @@ export default class RestaurantsList extends Component {
             this.loadData()
         }, (err) => {
             console.log(err)
+            this.loadData()
         }, opts);
   }
 
   loadData = () => {
-    this.setState({isReady: false})
+    
     const APIKey = 'wns1PtfYaQL_3BvYbPmIPeNLVNmmf6dMuOzCxu4xFnwh-v-a-RWBHGkMMoV_YHXUgrA3E2zFy_b52V_5Bv7PbLJsSnKOHsIKPHJXH_asQQ2r0w0jevdRq6p_GF3hXXYx'
     let url = `https://api.yelp.com/v3/businesses/search?term=restaurant&latitude=${this.state.location.latitude}&longitude=${this.state.location.longitude}&sort_by=distance`;
 
