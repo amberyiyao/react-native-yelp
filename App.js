@@ -12,26 +12,28 @@ export default class MovieList extends Component {
   }
 
   loadData = () => {
-
+    
     const APIKey = 'wns1PtfYaQL_3BvYbPmIPeNLVNmmf6dMuOzCxu4xFnwh-v-a-RWBHGkMMoV_YHXUgrA3E2zFy_b52V_5Bv7PbLJsSnKOHsIKPHJXH_asQQ2r0w0jevdRq6p_GF3hXXYx'
+    let url = `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=restaurant&location="New York City"`;
 
     const headers = new Headers();
-    //headers.append('Content-Type', 'application/json;charset=UTF-8');
+    headers.append('Content-Type', 'application/json;charset=UTF-8')
+    headers.append('Access-Control-Allow-Origin', '*')
     headers.append('Authorization', 'Bearer ' + APIKey)
-
-    let url = `https://api.yelp.com/v3/businesses/search`;
 
     let req = new Request(url, {
         headers: headers,
-        method: 'GET'
+        method: 'GET',
     });
-
+    
     fetch(req)
-    .then( res => res.json())
+    .then(response => response.json())
     .then(data => {
-        console.log(data)
+      this.setState({restaurants: data})
     })
-    .catch( console.error )
+    .catch(e => {
+      console.log(e);
+    });
 }
 
   componentDidMount(){
@@ -49,6 +51,7 @@ export default class MovieList extends Component {
 
     return (
         <Container>
+          <Text>{}</Text>
         </Container>
     )
 }
