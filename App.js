@@ -8,10 +8,18 @@ import Home from './screens/Home';
 
 const AppNavigation = createStackNavigator(
   {
-    Home: { 
-      screen: Home ,
+    Home: {
+      screen: Home,
+      navigationOptions: {
+        title: "Home"
+      }
     },
-    RestaurantsList: { screen: RestaurantsList }
+    RestaurantsList: {
+      screen: RestaurantsList,
+      navigationOptions: {
+        title: "Restaurants List"
+      }
+    }
   },
   {
     initialRouteName: 'Home',
