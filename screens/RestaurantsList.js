@@ -69,6 +69,7 @@ export default class RestaurantsList extends Component {
                 <Right>
                   <Button transparent onPress={()=>{
                       console.log('To Detail Page')
+                      this.props.navigation.navigate('Detail', { restaurant: item})
                   }}>
                     <Icon style={styles.button} name="arrow-forward"/>
                   </Button>

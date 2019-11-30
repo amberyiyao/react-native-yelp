@@ -37,7 +37,7 @@ export default class RestaurantsList extends Component {
   }
 
   loadData = () => {
-    
+
     const APIKey = 'wns1PtfYaQL_3BvYbPmIPeNLVNmmf6dMuOzCxu4xFnwh-v-a-RWBHGkMMoV_YHXUgrA3E2zFy_b52V_5Bv7PbLJsSnKOHsIKPHJXH_asQQ2r0w0jevdRq6p_GF3hXXYx'
     let url = `https://api.yelp.com/v3/businesses/search?term=restaurant&latitude=${this.state.location.latitude}&longitude=${this.state.location.longitude}&sort_by=distance`;
 
@@ -54,6 +54,7 @@ export default class RestaurantsList extends Component {
     .then(response => response.json())
     .then(data => {
       this.setState({restaurants: data})
+      console.log(this.state)
     })
     .then(()=>{
         this.props.navigation.navigate('RestaurantsList',{ restaurants: this.state.restaurants.businesses})

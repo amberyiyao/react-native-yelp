@@ -4,6 +4,7 @@ import { createAppContainer} from 'react-navigation';
 import { createStackNavigator} from 'react-navigation-stack';
 import RestaurantsList from './screens/RestaurantsList';
 import Home from './screens/Home';
+import Detail from './screens/Details'
 
 
 const AppNavigation = createStackNavigator(
@@ -22,9 +23,9 @@ const AppNavigation = createStackNavigator(
     },
     Detail:{
       screen: Detail,
-      navigationOptions: {
-        title: "Restaurants Details"
-      }
+      // navigationOptions: {
+      //   title: "Restaurants Details"
+      // }
     }
   },
   {

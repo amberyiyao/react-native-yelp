@@ -6,15 +6,22 @@ import { Ionicons } from '@expo/vector-icons'
 import NoImage from '../assets/image-regular.svg'
 
 export default class Details extends Component {
+    static navigationOptions = ({ navigation }) => {
+        return{
+            title: navigation.state.params.restaurant.name
+        }
+    }
+
     render() {
+        const restaurant = this.props.navigation.state.params.restaurant
         return (
             <Container>
                 <View>
-                    <Text>Name</Text>
-                    <Text>Phone</Text>
-                    <Text>Distance</Text>
-                    <Text>Price</Text>
-                    <Text>Rating</Text>
+                    <Text>{restaurant.name}</Text>
+                    <Text>{restaurant.phone}</Text>
+                    <Text>{restaurant.distance}</Text>
+                    <Text>{restaurant.price}</Text>
+                    <Text>{restaurant.rating}</Text>
                 </View>
             </Container>
         )
