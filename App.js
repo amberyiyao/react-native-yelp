@@ -28,8 +28,9 @@ const AppNavigation = createStackNavigator(
         color: 'white'
       },
       headerStyle: { 
-        backgroundColor: 'hsl(120, 30%, 45%)',
-      }
+        backgroundColor: '#E4665C',
+      },
+      headerTintColor: 'white'
     }
   }
 )

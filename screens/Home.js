@@ -10,9 +10,28 @@ export default class RestaurantsList extends Component {
     restaurants: [],
     isReady: false,
     location: {
-      latitude: 45.3496711,
-      longitude: -75.7569551
+      latitude: null,
+      longitude: null
     }
+  }
+
+  getLocation = () =>{
+        const opts = {
+            enableHighAccuracy: true,
+            timeout: 5000,
+            maximumAge: 1000 * 60 * 60 * 24,
+        };
+        navigator.geolocation.getCurrentPosition((pos) => {
+            console.log('get geolocation!')
+            const location = {
+                latitude: pos.coords.latitude,
+                longitude: pos.coords.longitude
+            }
+            this.setState({location})
+            this.loadData()
+        }, (err) => {
+            console.log(err)
+        }, opts);
   }
 
   loadData = () => {
@@ -35,8 +54,8 @@ export default class RestaurantsList extends Component {
       this.setState({restaurants: data})
     })
     .then(()=>{
-        this.setState({isReady: true})
         this.props.navigation.navigate('RestaurantsList',{ restaurants: this.state.restaurants.businesses})
+        this.setState({isReady: true})
     })
     .catch(e => {
       console.log(e);
@@ -60,15 +79,22 @@ export default class RestaurantsList extends Component {
           backgroundColor: '#fff',
           alignItems: 'center',
           justifyContent: 'center',
+        },
+        button: {
+          backgroundColor: '#E4665C'
         }
       });
 
-    if(!this.state.isReady) return <Spinner/>
+    if(!this.state.isReady) return (
+        <View style={styles.container}>
+            <Spinner/>
+        </View>
+    )
 
     return (
         <Container>
           <View style={styles.container}>
-            <Button rounded info onPress={this.loadData}>
+            <Button style={styles.button} rounded info onPress={this.getLocation}>
                 <Text>Load Restaurants</Text>
             </Button>
           </View>

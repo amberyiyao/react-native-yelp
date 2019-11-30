@@ -1,22 +1,25 @@
 import React, { Component } from 'react'
-import {FlatList } from 'react-native'
-import { Container, Text, ListItem, Button, Body, Right, Icon, Spinner} from 'native-base';
+import {FlatList, View, StyleSheet } from 'react-native'
+import { Container, Text, ListItem, Button, Body, Right, Icon, Spinner, Thumbnail, Left} from 'native-base';
 import * as Font from 'expo-font'
 import { Ionicons } from '@expo/vector-icons'
+import NoImage from '../assets/image-regular.svg'
 
 export default class RestaurantsList extends Component {
 
   state = {
     restaurants: [],
-    isReady: false,
-    location: {
-      latitude: 45.3496711,
-      longitude: -75.7569551
-    }
+    isReady: false
   }
 
   componentDidMount(){
-    this.setState({restaurants: this.props.navigation.state.params.restaurants})
+    let restaurants = this.props.navigation.state.params.restaurants.map((item)=>{
+      if(!item.image_url){
+        item.image_url = 'https://us.123rf.com/450wm/pavelstasevich/pavelstasevich1811/pavelstasevich181101065/112815953-stock-vector-no-image-available-icon-flat-vector.jpg?ver=6'
+      }
+      return item
+    })
+    this.setState({restaurants: restaurants})
     Font.loadAsync({
         Roboto: require('../node_modules/native-base/Fonts/Roboto.ttf'),
         Roboto_medium: require('../node_modules/native-base/Fonts/Roboto_medium.ttf'),
@@ -26,7 +29,28 @@ export default class RestaurantsList extends Component {
 
   render() {
 
-    if(!this.state.isReady) return <Spinner/>
+    const styles = StyleSheet.create({
+      container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+      button: {
+        color: '#E4665C'
+      },
+      p2:{
+        fontSize: 12,
+        color: '#888882'
+      }
+    });
+
+
+    if(!this.state.isReady) return (
+      <View style={styles.container}>
+          <Spinner/>
+      </View>
+    )
 
     return (
         <Container>
@@ -34,20 +58,23 @@ export default class RestaurantsList extends Component {
             data={this.state.restaurants}
             keyExtractor={({id}) => id}
             renderItem={({item}) => (
-              <ListItem>
+              <ListItem thumbnail>
+                <Left>
+                  <Thumbnail square source={{ uri: item.image_url }} />
+                </Left>
                 <Body>
                   <Text>{item.name}</Text>
-                  <Text>{(item.distance/1000).toFixed(2) + " km"}</Text>
+                  <Text style={styles.p2}>{(item.distance/1000).toFixed(2) + " km"}</Text>
                 </Body>
                 <Right>
                   <Button transparent onPress={()=>{
                       console.log('To Detail Page')
                   }}>
-                    <Icon name="arrow-forward"/>
+                    <Icon style={styles.button} name="arrow-forward"/>
                   </Button>
                 </Right>
               </ListItem>
-            )}
+            ) }
           />
         </Container>
     )
