@@ -10,8 +10,8 @@ export default class RestaurantsList extends Component {
     restaurants: [],
     isReady: false,
     location: {
-      latitude: null,
-      longitude: null
+      latitude: 45.3496711,
+      longitude: -75.7569551
     }
   }
 
