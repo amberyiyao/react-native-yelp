@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { StyleSheet, View } from 'react-native';
 import { Container, Text, Button, Spinner} from 'native-base';
 import * as Font from 'expo-font'
 import { Ionicons } from '@expo/vector-icons'
@@ -21,7 +22,6 @@ export default class RestaurantsList extends Component {
 
     const headers = new Headers();
     headers.append('Content-Type', 'application/json;charset=UTF-8')
-    headers.append('Access-Control-Allow-Origin', '*')
     headers.append('Authorization', 'Bearer ' + APIKey)
 
     let req = new Request(url, {
@@ -54,14 +54,26 @@ export default class RestaurantsList extends Component {
 
   render() {
 
+    const styles = StyleSheet.create({
+        container: {
+          flex: 1,
+          backgroundColor: '#fff',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }
+      });
+
     if(!this.state.isReady) return <Spinner/>
 
     return (
         <Container>
-          <Button rounded info onPress={this.loadData}>
-              <Text>Load Restaurants</Text>
-          </Button>
+          <View style={styles.container}>
+            <Button rounded info onPress={this.loadData}>
+                <Text>Load Restaurants</Text>
+            </Button>
+          </View>
         </Container>
     )
   }
 }
+
