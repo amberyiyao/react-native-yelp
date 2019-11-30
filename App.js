@@ -36,6 +36,11 @@ export default class MovieList extends Component {
 
   componentDidMount(){
     this.loadData()
+    Font.loadAsync({
+        Roboto: require('../node_modules/native-base/Fonts/Roboto.ttf'),
+        Roboto_medium: require('../node_modules/native-base/Fonts/Roboto_medium.ttf'),
+        ...Ionicons.font
+    }).then(() => this.setState({ isReady: true }))
   }
 
   render() {
