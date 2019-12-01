@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import { Image, StyleSheet } from 'react-native'
 import { Container, Text, Content, Card, CardItem, Button, Body, Right, Icon, Spinner, Thumbnail, Left} from 'native-base';
-import * as Font from 'expo-font'
-import { Ionicons } from '@expo/vector-icons'
-import { Header } from 'react-navigation-stack';
+import AppIcon from '../assets/icon.png'
 
 export default class Details extends Component {
     static navigationOptions = ({ navigation }) => {
@@ -18,10 +16,13 @@ export default class Details extends Component {
         const styles = StyleSheet.create({
             detailsCtn: {
                 display:"flex", 
-                flexDirection:"column"
+                flexDirection:"column",
+                justifyContent: "center",
+                alignItems: "center",
             },
-            button: {
-              color: '#E4665C'
+            textLabel: {
+                color: "#888882", 
+                fontSize: 14
             },
             p2:{
               fontSize: 12,
@@ -29,13 +30,18 @@ export default class Details extends Component {
             }
           })
 
+          let costs = restaurant.price
+          if (!costs) {
+              costs = "No info"
+          }
+
         return (
             <Container>
                 <Content>
                     <Card style={{flex: 0}}>
                     <CardItem>
                     <Left>
-                    <Thumbnail source={{uri: "../assets/icon.png"}} />
+                    <Thumbnail source={AppIcon} />
                         <Body>
                             <Text>{restaurant.name}</Text>
                             <Text note>{restaurant.phone}</Text>
@@ -46,18 +52,18 @@ export default class Details extends Component {
               <Image source={{uri: restaurant.image_url}} style={{height: 200, width: null, flex: 1}}/>
             </CardItem>
             <CardItem>
-              <Left style={styles.detailsCtn}>
-                  <Icon active name="map" />
-                  <Text>{ (restaurant.distance/1000).toFixed(2) + " km"}</Text>
-              </Left>
-              <Left style={styles.detailsCtn}>
-                  <Icon active name="wallet" />
-                  <Text>{restaurant.price}</Text>
-              </Left>
-              <Left style={styles.detailsCtn}>
-                <Icon active name="star" />
-                <Text>{restaurant.rating}</Text>
-              </Left>
+              <Body style={styles.detailsCtn}>
+                  <Icon active name="map" style={{color: "#E4665C"}} />
+                  <Text style={styles.textLabel}>{ (restaurant.distance/1000).toFixed(2) + " km"}</Text>
+              </Body>
+              <Body style={styles.detailsCtn}>
+                  <Icon active name="wallet" style={{color: "#E4665C"}}/>
+                  <Text style={styles.textLabel}>{costs}</Text>
+              </Body>
+              <Body style={styles.detailsCtn}>
+                <Icon active name="star" style={{color: "#E4665C"}}/>
+                <Text style={styles.textLabel}>{restaurant.rating}</Text>
+              </Body>
             </CardItem>
                     </Card>
                 </Content>
