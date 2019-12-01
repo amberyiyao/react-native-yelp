@@ -24,7 +24,11 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.algonquincollege.amberandlinkrestaurants"
+    },
+    "android": {
+      "package": "com.algonquincollege.amberandlinkrestaurants"
     },
     "description": "",
     "githubUrl": "https://github.com/zhou0160/react-native-yelp"
