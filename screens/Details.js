@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import { Image, StyleSheet } from 'react-native'
+import { Image, StyleSheet, View } from 'react-native'
 import { Container, Text, Content, Card, CardItem, Button, Body, Right, Icon, Spinner, Thumbnail, Left} from 'native-base';
 import AppIcon from '../assets/icon.png'
 
 export default class Details extends Component {
     static navigationOptions = ({ navigation }) => {
         return{
-            title: navigation.state.params.restaurant.name
+            title: navigation.state.params.restaurant.name 
         }
     }
 
@@ -37,7 +37,7 @@ export default class Details extends Component {
 
         return (
             <Container>
-                <Content>
+                <View>
                     <Card style={{flex: 0}}>
                     <CardItem>
                     <Left>
@@ -66,7 +66,7 @@ export default class Details extends Component {
               </Body>
             </CardItem>
                     </Card>
-                </Content>
+                </View>
             </Container>
         )
     }
