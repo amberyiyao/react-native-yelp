@@ -3,7 +3,6 @@ import {FlatList, View, StyleSheet } from 'react-native'
 import { Container, Text, ListItem, Button, Body, Right, Icon, Spinner, Thumbnail, Left} from 'native-base';
 import * as Font from 'expo-font'
 import { Ionicons } from '@expo/vector-icons'
-import NoImage from '../assets/image-regular.svg'
 
 export default class RestaurantsList extends Component {
 
