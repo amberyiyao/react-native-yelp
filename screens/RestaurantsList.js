@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 import {FlatList, View, StyleSheet } from 'react-native'
-import { Container, Text, ListItem, Button, Body, Right, Icon, Spinner, Thumbnail, Left} from 'native-base';
+import { Container, Text, ListItem, Button, Body, Right, Icon, Thumbnail, Left} from 'native-base';
 
 export default class RestaurantsList extends Component {
 
   state = {
-    restaurants: [],
-    isReady: false
+    restaurants: []
   }
 
   componentDidMount(){
@@ -37,20 +36,13 @@ export default class RestaurantsList extends Component {
       }
     });
 
-
-    if(!this.state.isReady) return (
-      <View style={styles.container}>
-          <Spinner/>
-      </View>
-    )
-
     return (
         <Container>
           <FlatList 
             data={this.state.restaurants}
             keyExtractor={({id}) => id}
             renderItem={({item}) => (
-              <ListItem onPress={()=> this.props.navigation.navigate('Detail', { restaurant: item})} thumbnail>
+              <ListItem onPress={()=> {this.props.navigation.navigate('Detail', { restaurant: item})}} thumbnail>
                 <Left>
                   <Thumbnail square source={{ uri: item.image_url }} />
                 </Left>
