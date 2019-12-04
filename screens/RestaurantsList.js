@@ -17,13 +17,13 @@ export default class RestaurantsList extends Component {
         item.image_url = 'https://us.123rf.com/450wm/pavelstasevich/pavelstasevich1811/pavelstasevich181101065/112815953-stock-vector-no-image-available-icon-flat-vector.jpg?ver=6'
       }
       return item
-    })
+    }) // if there is no image, use the placeholder
     this.setState({restaurants: restaurants})
     Font.loadAsync({
         Roboto: require('../node_modules/native-base/Fonts/Roboto.ttf'),
         Roboto_medium: require('../node_modules/native-base/Fonts/Roboto_medium.ttf'),
         ...Ionicons.font
-    }).then(() => this.setState({ isReady: true }))
+    }).then(() => this.setState({ isReady: true }))//if other pages need to load font?
   }
 
   render() {
