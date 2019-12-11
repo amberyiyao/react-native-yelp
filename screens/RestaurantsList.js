@@ -51,7 +51,7 @@ export default class RestaurantsList extends Component {
                   <Text style={styles.p2}>{(item.distance/1000).toFixed(2) + " km"}</Text>
                 </Body>
                 <Right>
-                  <Button transparent >
+                  <Button onPress={()=> {this.props.navigation.navigate('Detail', { restaurant: item})}} transparent >
                     <Icon style={styles.button} name="arrow-forward"/>
                   </Button>
                 </Right>
